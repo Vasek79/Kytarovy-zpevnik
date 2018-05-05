@@ -1,0 +1,178 @@
+% Nastaveni zrcadla tisku a ostatnich delkovych registru
+\setlength{\textwidth}{170mm}
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-0,54mm}
+\setlength{\oddsidemargin}{15mm}
+\setlength{\evensidemargin}{25mm}
+\setlength{\parindent}{0mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textheight}{242mm}
+\setlength{\columnsep}{0mm}
+\setlength{\footskip}{15mm}
+
+
+
+% Predefinovani vypisu cisla stranky
+%\makeatletter
+%\def\ps@plain{\let\@mkboth\@gobbletwo                                           
+%     \let\@oddhead\@empty\def\@oddfoot{\reset@font
+%        \colorbox{podklad}{
+%        \makebox[\textwidth][l]{\hfill {\bf \thepage} \hfill}}
+%          \hfil}\let\@evenhead\@empty\let\@evenfoot\@oddfoot}
+%\makeatother
+
+
+% Predefinovani vypisu nadpisu nazvu pisnicek
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                     {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                     {.1ex \@plus.1ex}%
+				      {}}
+\makeatother
+
+
+\newcounter{cislosloky}
+
+
+% Definice,jak se má vysázet název písně a autor
+\newcommand{\hlavicka}[2]{{
+%\emph{\huge{#1}}\hfill \tiny{#2}\normalsize 
+\section*{\raisebox{-2ex}{\emph{ \huge{#1}}}} \hfill \tiny #2
+\normalsize
+\vskip 3pt
+\hrule height 3pt
+\vskip 10pt
+\setcounter{cislosloky}{0}
+
+\addcontentsline{toc}{subsection}{#1 \texttt{\small (#2)}}
+
+}}
+
+
+% Definice prikazu "nadpisobsah" (pouziva se pouze pro nadpis "Obsah")
+\newcommand{\nadpisobsah}[1]{{
+ \fontsize{10}{10}
+ \usefont{T1}{cmr}{m}{n}
+ \selectfont
+
+ %\colorbox{podklad}{\makebox[\textwidth]{\scalebox{3.5}{\color{podklad}X}}}
+
+ \vspace{-10mm}
+ \hfill \Large ~
+ \vspace{-18mm}
+
+ \section*{#1}
+
+}}
+
+
+
+% Definice prikazu "nadpisbezautora" - pouziva se pro nazvy kapitol bez druheho parametru (autora)
+\newcommand{\nadpisbezautora}[1]{
+{ \fontsize{10}{10}
+ \usefont{T1}{ptl}{m}{n}
+ \selectfont
+
+ \setcounter{cislosloky}{0}
+
+ \colorbox{podklad}{\makebox[\textwidth]{\scalebox{3.5}{\color{podklad}X}}}
+
+ \vspace{-10mm}
+ \hfill \Large ~
+ \vspace{-18mm}
+
+ \section*{#1}
+ \addcontentsline{toc}{subsection}{#1}
+
+}}
+
+% Zpusob zapisu nadpisu "Obsah" do seznamu vsech kapitol v obsahu
+\makeatletter
+\renewcommand\tableofcontents{%
+     \nadpisobsah{\contentsname}
+     \@starttoc{toc}%
+}
+
+\makeatother
+
+
+\interlinepenalty=10000
+
+
+\newcommand{\sloka}[1]{
+\setlength{\leftmargin}{20mm}
+\begin{list}{\refstepcounter{cislosloky}\thecislosloky.}{\setlength{\leftmargin}{10mm}}                                                                                    
+  \fontencoding{T1}\selectfont
+  \item #1
+\end{list}
+}
+
+
+\newcommand{\slokanocis}[1]{
+%\setlength{\leftmargin}{20mm}
+\begin{list}{}{\setlength{\leftmargin}{10mm}}
+  \fontencoding{t}\selectfont
+  \item #1
+\end{list}
+}
+
+
+\newcommand{\refren}[1]{
+\begin{list}{Ref:}{\setlength{\leftmargin}{10mm} \setlength{\labelwidth}{10mm}}
+  \fontencoding{T1}\selectfont
+  \item #1
+\end{list}
+}
+
+\newcommand{\refrenI}[1]{
+\begin{list}{Ref 1:}{\setlength{\leftmargin}{10mm} \setlength{\labelwidth}{10mm}}
+  \fontencoding{T1}\selectfont
+  \item #1
+\end{list}
+}
+
+\newcommand{\refrenII}[1]{
+\begin{list}{Ref 2:}{\setlength{\leftmargin}{10mm} \setlength{\labelwidth}{10mm}}
+  \fontencoding{T1}\selectfont
+  \item #1
+\end{list}
+}
+
+\newcommand{\repetice}[1]{
+\begin{list}{\bf [:}{\setlength{\leftmargin}{5mm} \setlength{\topsep}{-0.3em}}
+  \fontencoding{T1}\selectfont
+  \item #1{\bf :]}
+\end{list}
+}
+
+
+\newcommand{\repeticenoindent}[1]{
+\begin{list}{\bf [:}{\setlength{\leftmargin}{5mm} \setlength{\topsep}{-0.3em}}
+  \fontencoding{T1}\selectfont
+  \item #1{\bf :]}
+\end{list}
+}
+
+
+\newcommand{\outro}[1]{
+\begin{list}{Outro:}{\setlength{\leftmargin}{10mm} \setlength{\labelwidth}{20mm}}
+  \fontencoding{T1}\selectfont
+  \item #1
+\end{list}
+}
+
+
+%\newcommand{\repeticenoindent}[1]{
+%{\bf [:~}#1{\bf ~:]}
+%}
+
+
+\newcommand{\carauprostred}{%
+  \vspace{-3\baselineskip}
+
+  \begin{center}
+  \rule[0mm]{30mm}{0.1mm}
+  \end{center}
+}

@@ -1,0 +1,273 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hmaty}
+
+
+
+\makeatletter
+
+
+\newdimen\rozliseni      % udava fyzickou velikost jednoho bodu obrazku
+\newdimen\tlustacara     % sirka silne cary vykreslujici vrsek nulteho prazce
+\newdimen\slabacara      % sirka cary vykreslujici prazce a struny
+\newdimen\barrecara      % sirka cary predstavujici barre hmat
+
+\newcount\xoffset        % sirka leveho a praveho prazdneho okraje obrazku
+\newcount\sirkaobrazu    % sirka celeho obrazku s hmatem, vcetne okraju
+\newcount\vyskaobrazu    % vyska celeho obrazku s hmatem, vcetne okraju
+\newcount\yoffset        % posunuti hmatu nahoru vuci levemu dolnimu okraji
+\newcount\pocitadlo      % urceno pro pomocne vypocty
+\newcount\zarazka        % urceno pro pomocne vypocty
+\newcount\sirka          % urceno pro pomocne vypocty
+\newcount\vyska          % urceno pro pomocne vypocty
+
+\newcommand\pocetprazcu{6}  % vyska obrazku v prazcich
+\newcommand\pocetstrun{6}   % sirka obrazku v poctu strun
+\newcommand\pomerstpr{2}    % udava pomer velikosti mezery mezi prazci a strunami
+\rozliseni=3mm              % nastav velikost jednoho bodu v obrazku
+\tlustacara=0.6mm           % velikost horizontalni cary nad prvnim prazcem
+\slabacara=0.2mm            % sirka strun a predelu prazcu
+\barrecara=1.5mm            % tlouska cary pro barre hmat
+
+% pri zpracovani parametru znaci, jake bylo predchozi nactene pismeno
+% "n" znamena, ze zvolene pismeno nacteno nebylo, "a" znamena, ze bylo
+\newcommand{\bylop}{n}
+\newcommand{\bylob}{n}
+
+
+\yoffset=2     % posunuti tabulky hmatu vzhledem ke spodnimu okraji obrazku
+\xoffset=2     % posunuti tabulky hmatu vzhledem ke spodnimu okraji obrazku
+
+
+% kompletni sirka obrazku (hmat + prazdne okraje vlevo a vpravo)
+\sirkaobrazu=\pocetstrun \advance\sirkaobrazu by -1
+\advance\sirkaobrazu by \xoffset \advance\sirkaobrazu by \xoffset
+
+
+
+% kompletni vyska obrazku: hmat + okraje nahore (misto pro symboly x, o, ...)
+% a dole (misto pro jmeno akordu)
+\vyskaobrazu=\pocetprazcu \multiply\vyskaobrazu by \pomerstpr
+\advance\vyskaobrazu by \yoffset \advance\vyskaobrazu by 1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% vlastni definice makra hmat
+\newcommand{\hmat}[3][0]{\vbox{\hbox{
+
+% nastav rozliseni obrazku
+\unitlength\rozliseni
+
+% vytvor obrazek zadane velikosti
+\begin{picture}(\sirkaobrazu,\vyskaobrazu)
+
+  % standardni sirka vykreslovanych car
+  \linethickness{\slabacara}
+
+  % nakresli struny
+  \pocitadlo=\xoffset
+  \zarazka=\xoffset \advance\zarazka by \pocetstrun
+  \vyska=\pocetprazcu \multiply\vyska by \pomerstpr
+  \@whilenum \pocitadlo<\zarazka \do {
+    \put(\pocitadlo,\yoffset){\line(0,1){\vyska}}
+    \advance\pocitadlo by 1
+  }
+
+  % nakresli vsechny prazce, krome toho nejvrchnejsiho
+  \zarazka=\pocetprazcu
+  \multiply\zarazka by \pomerstpr \advance\zarazka by \yoffset
+  \sirka=\pocetstrun \advance\sirka by -1
+  \pocitadlo=\yoffset
+  \@whilenum \pocitadlo<\zarazka \do {
+    \put(\xoffset,\pocitadlo){\line(1,0){\sirka}}
+    \advance\pocitadlo by \pomerstpr
+  }
+
+  % caru nad prvnim prazcem nakresli silne
+  \linethickness{\tlustacara}
+  \vyska=\pocetprazcu
+  \multiply\vyska by \pomerstpr \advance\vyska by \yoffset
+    \put(\xoffset,\vyska){\line(1,0){\sirka}}
+  \linethickness{\slabacara}
+
+  % vykresli pripadne barrecko a/nebo cislo prvniho prazce
+  \putbarre{#1}
+
+  % vykresli vsechny stisky strun
+  \putdots{#2}
+
+
+  % vypis jmeno akordu
+  \put(0,0){\hbox to \sirkaobrazu\rozliseni{\hss {\bf #3}\hss}}
+
+
+\end{picture}
+
+}}}
+
+
+
+
+%\newcounter{pozice}
+
+
+% vykresli nad strunou #1 krizek (struna se nehraje)
+% (vytvor uprostred nad strunou hbox se sirkou 2 a do jeho stredu vykresli x)
+\newcommand{\kreslix}[1]{
+  \pocitadlo=#1
+  \advance\pocitadlo by \xoffset \advance\pocitadlo by -1
+  \vyska=\pocetprazcu \multiply\vyska by \pomerstpr \advance\vyska by \yoffset
+  \put(0,0.3){\put(\pocitadlo,\vyska){\hbox to 2\rozliseni{\hfill \footnotesize{$\times$}\hfill}}}
+}
+
+
+
+% vykresli nad strunou #1 kolecko (struna se hraje prazdna)
+\newcommand{\kreslio}[1]{
+  \pocitadlo=#1 \advance\pocitadlo by \xoffset
+  \vyska=\pocetprazcu \multiply\vyska by \pomerstpr \advance\vyska by \yoffset
+  \put(0,0.6){\put(\pocitadlo,\vyska){\circle{0.6}}}
+}
+
+
+
+% vykresli na strune #1 na pozici #2 cernou tecku
+\newcommand{\kreslitecku}[2]{
+  \pocitadlo=#2 \multiply\pocitadlo by \pomerstpr
+  \vyska=\pocetprazcu \multiply\vyska by \pomerstpr \advance\vyska by \yoffset
+  \advance\vyska by -\pocitadlo
+  \pocitadlo=\pomerstpr \divide\pocitadlo by 2 \advance\vyska by \pocitadlo
+  \sirka=#1 \advance\sirka by \xoffset
+  \put(\sirka,\vyska){\circle*{0.8}}
+}
+
+
+% vykresli barre hmat pres cely prazec na strune #1
+\newcommand{\kreslibarre}[1]{
+  \vyska=\pocetprazcu \multiply\vyska by \pomerstpr \advance\vyska by \yoffset
+  \pocitadlo=#1 \multiply\pocitadlo by \pomerstpr
+  \advance\vyska by -\pocitadlo \advance\vyska by 1
+  \pocitadlo=\sirka \advance\pocitadlo by 1
+  \linethickness{\barrecara}
+  \put(\xoffset,0){\put(-0.5,\vyska){\line(1,0){\pocitadlo}}}
+  \linethickness{\slabacara}
+}
+
+
+
+% vykresli vlevo od hmatu cislo pocatecniho prazce
+\newcommand{\kreslicislo}[1]{
+  \vyska=\pocetprazcu \multiply\vyska by \pomerstpr \advance\vyska by \yoffset \advance\vyska by -1
+  \sirka=\xoffset \advance\sirka by -1
+  \put(\sirka,\vyska){{\bf \footnotesize #1}}
+}
+
+
+
+
+
+
+
+% spolecna obecna definice vsech pouzitych testu
+\def\test #1{\expandafter\maskif\string#1:}
+\expandafter\def\expandafter\maskif\string\if #1:{%
+\csname test#1\endcsname}
+
+
+
+% test zjistujici, zda dany znak je x (struna se nehraje)
+\newif\ifnext
+\let\ifjetox=\iffalse
+\def\testjetox #1{\if x#1 \nexttrue
+                  \else \nextfalse
+                  \fi
+\ifnext}
+
+
+
+% test zjistujici, zda dany znak je , (prechod na dalsi strunu)
+\newif\ifnext
+\let\ifjetocarka=\iffalse
+\def\testjetocarka #1{\if ,#1 \nexttrue
+                  \else \nextfalse
+                  \fi
+\ifnext}
+
+
+
+% test zjistujici, zda dany znak je p (struna se hraje na danem prazci,
+% cislo prazce nasleduje jako dalsi parametr)
+\newif\ifnext
+\let\ifjetop=\iffalse
+\def\testjetop #1{\if p#1 \nexttrue
+                  \else \nextfalse
+                  \fi
+\ifnext}
+
+
+
+% test zjistujici, zda dany znak je o (struna se hraje prazdna,
+% vykresli se prazdne kolecko nad strunou)
+\newif\ifnext
+\let\ifjetoo=\iffalse
+\def\testjetoo #1{\if o#1 \nexttrue
+                  \else \nextfalse
+                  \fi
+\ifnext}
+
+
+% test zjistujici, zda dany znak je b (barre hmat, cislo prazce nasleduje jako dalsi parametr)
+\newif\ifnext
+\let\ifjetob=\iffalse
+\def\testjetob #1{\if b#1 \nexttrue
+                  \else \nextfalse
+      \fi \ifnext}
+
+
+
+\newcount\tempnum
+
+
+% cislo prave zpracovavane struny
+\newcount\cislostruny
+
+% zpracuj postupne vsechny znaky druheho parametru prikazu \hmat
+\def\putdots #1{\tempnum=0 \let\next=\cyklstruny \next#1:}
+\def\cyklstruny #1{\if :#1\let\next=\relax
+                   \else \if a\bylop \renewcommand{\bylop}{n} \kreslitecku{\cislostruny}{#1}
+                         \fi
+                         \test\ifjetop #1 \renewcommand{\bylop}{a}
+                              \fi
+                         \test\ifjetocarka #1 \advance\cislostruny by 1
+                              \fi
+                         \test\ifjetox #1 \kreslix{\cislostruny}
+                              \fi
+                         \test\ifjetoo #1 \kreslio{\cislostruny}
+                              \fi
+                   \fi
+\next}
+
+
+
+
+% zpracuj postupne vsechny znaky prvniho parametru prikazu \hmat
+\def\putbarre #1{\tempnum=0 \let\next=\cyklbarre \next#1:}
+\def\cyklbarre #1{\if :#1\let\next=\relax
+                  \else \if a\bylob \renewcommand{\bylob}{n} \kreslibarre{#1}
+                        \fi
+                        \test\ifjetob #1 \renewcommand{\bylob}{a}
+                             \fi
+                        \if a\bylop \renewcommand{\bylop}{n} \kreslicislo{#1}
+                        \fi
+                        \test\ifjetop #1 \renewcommand{\bylop}{a}
+                             \fi
+                  \fi
+\next}
+
+
+
+
+\makeatother
+
