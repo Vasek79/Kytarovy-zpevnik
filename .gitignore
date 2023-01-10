@@ -1,0 +1,12 @@
+#Ignore thumbnails created by Windows
+Thumbs.db
+
+#Ignore latex help files
+*.aux
+*.log
+*.mx1
+*.out
+*.synctex(busy)
+*.toc
+*.dvi
+*.synctex.gz
