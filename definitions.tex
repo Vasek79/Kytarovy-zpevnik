@@ -1,0 +1,119 @@
+% Predefinovani vypisu nadpisu nazvu pisnicek
+\makeatletter
+\renewcommand\section{%
+    \@startsection {section}{1}{\z@}%
+                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                   {.1ex \@plus.1ex}%
+                   {}%
+}
+\makeatother
+
+
+% Příkaz pro okamžité vkládání řádků do obsahu
+% https://tex.stackexchange.com/questions/10291/addtocontents-at-end-of-document-not-getting-written-to-toc-file/10297#10297
+\makeatletter
+\newcommand{\immaddtocontents}[1]{{%
+    \let\protect\@unexpandable@protect
+    \immediate\write\@auxout{\noexpand\@writefile{toc}{#1}}%
+}}
+\makeatother
+
+\newcommand{\addContentSection}[1]{\immaddtocontents{\protect\contentsline{Chapter}{\protect\numberline{}\textbf{\hspace{-1em}#1}}{}{}}}
+
+
+% Definice,jak se má vysázet název písně a její autor
+\newcounter{cisloSloky}
+\newcommand{\hlavicka}[2]{
+    \section*{\raisebox{-2ex}{\emph{ \huge{#1}}}} \hfill #2
+    \normalsize
+    \vskip 3pt
+    \hrule height 3pt
+    \vskip 10pt
+    \setcounter{cisloSloky}{0}
+    \addcontentsline{toc}{subsection}{#1 \texttt{\small (#2)}}
+}
+
+% Varianta bez autora
+\newcommand{\hlavickaBezAutora}[1]{
+    \section*{\raisebox{-2ex}{\emph{ \huge{#1}}}}
+    \normalsize
+    \vskip 3pt
+    \hrule height 3pt
+    \vskip 10pt
+    \setcounter{cisloSloky}{0}
+    \addcontentsline{toc}{subsection}{#1}
+}
+
+
+% Zpusob zapisu nadpisu "Obsah" do seznamu vsech kapitol v obsahu
+\newcommand{\nadpisobsah}[1]{
+    \begin{center}
+        \textbf{\Huge #1}
+    \end{center}
+}
+   
+\makeatletter
+\renewcommand\tableofcontents{%
+     \nadpisobsah{\contentsname}
+     \@starttoc{toc}%
+     \addContentSection{\hspace*{-3em}}% Proc je to potřeba???
+}
+\makeatother
+
+
+% The penalty added to the badness of each line within a paragraph (no associated penalty node)
+% Increasing the value makes tex try to have fewer lines in the paragraph.
+\interlinepenalty=10000
+
+
+% Příkaz pro nastavení fontu textu písně
+\newcommand{\setTextFont}{\fontencoding{T1}\fontfamily{fav}\selectfont}
+
+
+% Sloka písně
+\newcommand{\sloka}[1]{
+    \begin{list}{\textbf{\emph{\refstepcounter{cisloSloky}\thecisloSloky.}}}{\setlength{\leftmargin}{10mm}}
+        \setTextFont
+        \item #1
+    \end{list}
+}
+
+% Sloka písně bez čísla
+\newcommand{\slokaBezCisla}[1]{
+    \begin{list}{}{\setlength{\leftmargin}{10mm}}
+        \setTextFont
+        \item #1
+    \end{list}
+}
+    
+% Opakování sloky (číslo bez textu)
+\newcommand{\slokaopakovani}[1]{
+    \begin{list}{\textbf{\emph{#1}}}{\setlength{\leftmargin}{10mm}}
+        \setTextFont
+        \item
+    \end{list}
+}
+
+% Refrén
+\newcommand{\refren}[1]{
+    \begin{list}{\textbf{\emph{R:}}}{\setlength{\leftmargin}{10mm} \setlength{\labelwidth}{10mm}}
+        \setTextFont
+        \item #1
+    \end{list}
+}
+
+% Refrefén s číslem
+\newcommand{\refrenX}[2]{
+    \begin{list}{\textbf{\emph{R{#1}:}}}{\setlength{\leftmargin}{10mm} \setlength{\labelwidth}{10mm}}
+        \setTextFont
+        \item #2
+    \end{list}
+}
+
+% Repetice
+\newcommand{\repetice}[1]{
+    \begin{list}{\bf [:}{\setlength{\leftmargin}{5mm} \setlength{\topsep}{-0.3em}}
+        \setTextFont
+        \item #1 {\bf :]}
+    \end{list}
+}

@@ -1,0 +1,130 @@
+\documentclass[a5paper, 10pt, onecolumn]{article}
+\usepackage[T1]{fontenc}
+% Use with MikTeX:
+% initexmf -u
+% initexmf --mkmaps
+\usepackage{arev}
+\usepackage{aurical}
+\usepackage[czech]{babel}
+\usepackage{lmodern}
+% A5 = 148 x 210
+\usepackage[text={132mm, 180mm},left=8mm,top=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{musixtex}
+\usepackage{anyfontsize}
+\usepackage[pdftex]{hyperref}
+\usepackage[bottom]{footmisc}
+\usepackage{hmaty}
+
+\hypersetup{
+    colorlinks = true
+}
+
+
+\begin{document}
+
+\include{akordy}
+\include{definitions}
+
+% Titulní strana
+\begin{titlepage}
+	\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.65]{jezek.png}\\
+		\vspace{5em}
+		{\fontsize{80}{90}\Fontskrivan\selectfont Zpěvník}
+	\end{center}
+	\end{figure}		
+\end{titlepage}
+
+
+% První strana
+\pagenumbering{gobble}
+\noindent Dílo je vytvořeno pod licencí Creative Commons (CC BY 4.0). Autorem je VasaM. Dílo smíte:
+\begin{itemize}
+	\item \textit{sdílet} -- rozmnožovat a distribuovat materiál prostřednictvím jakéhokoli média v jakémkoli formátu
+	\item \textit{upravit} -- remixovat, změnit a vyjít z původního díla pro jakýkoliv účel, a to i komerční. 
+\end{itemize} 
+Za podmínky uvedení jeho původu, tedy je Vaší povinností uvést autorství, poskytnout s dílem odkaz na licenci a vyznačit Vámi provedené změny. Toho můžete docílit jakýmkoli rozumným způsobem, nicméně nikdy ne způsobem naznačujícím, že by poskytovatel licence schvaloval nebo podporoval Vás nebo Váš způsob užití díla. Poskytovatel licence nemůže odvolat tato oprávnění do té doby, dokud dodržujete licenční podmínky.\\
+\\
+\\
+Zdrojové soubory k tomuto zpěvníku najdete na \url{https://github.com/VasaMM/zpevnik}. Vytvořené pdf tamtéž.\\
+\\
+\\
+Ke zpěvníku byl vytvořen playlist pro službu Spotify \url{https://open.spotify.com/playlist/2eriz9vxG9uJzPwseSasVu?si=fcc7d09377ba4879}.\\
+\\
+\\
+Tento soubor byl vytvořen \today.
+
+
+% Obsah
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+\pagenumbering{arabic}
+\setcounter{page}{0}
+
+
+% Písničky
+\addContentSection{A}
+\include{Písničky/A te Rehradice.tex}
+\include{Písničky/Anděl.tex}
+\include{Písničky/Až to se mnou sekne.tex}
+\addContentSection{B}
+\include{Písničky/Babička Mary.tex}
+\include{Písničky/Batalion.tex}
+\include{Písničky/Bedna od whisky.tex}
+\include{Písničky/Bláznova ukolébavka.tex}
+\include{Písničky/Blues Folsomské věznice.tex}
+\include{Písničky/Blues na cestu poslední.tex}
+\include{Písničky/Břímě.tex}
+\include{Písničky/Buráky.tex}
+\addContentSection{C}
+\include{Písničky/Cesta.tex}
+\include{Písničky/Čůrej.tex}
+\addContentSection{D}
+\include{Písničky/Divoké koně.tex}
+\include{Písničky/Dobrák od kosti.tex}
+\include{Písničky/Dokud se zpívá.tex}
+\include{Písničky/Ďábel a syn.tex}
+\addContentSection{F}
+\include{Písničky/Frankey Dlouhán.tex}
+\addContentSection{G}
+\include{Písničky/Gorale.tex}
+\addContentSection{H}
+\include{Písničky/Hlídač krav.tex}
+\include{Písničky/Ho ho Watanay.tex}
+\include{Písničky/Hruška.tex}
+\include{Písničky/Hudsonský šífy.tex}
+\include{Písničky/Husličky.tex}
+\include{Písničky/Hvězdář.tex}
+\addContentSection{J}
+\include{Písničky/Jaro.tex}
+\include{Písničky/Jasná zpráva.tex}
+\include{Písničky/Jdem zpátky do lesů.tex}
+\include{Písničky/Jdou po mně jdou.tex}
+\include{Písničky/Jednou mi fotr povídá.tex}
+\include{Písničky/Ještě jedno kafe bych si dal.tex}
+\include{Písničky/Jožin z bažin.tex}
+\addContentSection{K}
+\include{Písničky/Kdyby tady byla taková panenka.tex}
+\include{Písničky/Knockin on heavens door.tex}
+\include{Písničky/Kometa.tex}
+\include{Písničky/Kulatý obdélníky.tex}
+\addContentSection{L}
+\include{Písničky/Lodníkův lament.tex}
+\addContentSection{M}
+\include{Písničky/Mezi horami.tex}
+\include{Písničky/Montgomery.tex}
+\addContentSection{N}
+\include{Písničky/Nad stádem koní.tex}
+\addContentSection{O}
+\include{Písničky/Okoř.tex}
+\addContentSection{S}
+\include{Písničky/Síla starejch vín.tex}
+\include{Písničky/sbirka_zvadlejch_ruzi.tex}
+
+
+\end{document}
+
+
