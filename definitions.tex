@@ -86,11 +86,11 @@
     \end{list}
 }
     
-% Opakování sloky (číslo bez textu)
-\newcommand{\slokaOpakovani}[1]{
+% Opakování sloky (vlastní číslo)
+\newcommand{\slokaOpakovani}[2]{
     \begin{list}{\textbf{\emph{#1}}}{\setlength{\leftmargin}{10mm}}
         \setTextFont
-        \item
+        \item #2
     \end{list}
 }
 
