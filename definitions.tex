@@ -33,6 +33,17 @@
     \addcontentsline{toc}{subsection}{#1 \texttt{\small (#2)}}
 }
 
+% Varianta se zvýrazněním
+\newcommand{\hlavickaStar}[2]{
+    \section*{\color{ForestGreen}\raisebox{-2ex}{\emph{ \huge{#1}}}} \hfill #2\hspace{2px}
+    \normalsize
+    \vskip 3pt
+    \hrule height 3pt
+    \vskip 10pt
+    \setcounter{cisloSloky}{0}
+    \addcontentsline{toc}{subsection}{$\filledstar$#1 \texttt{\small (#2)}}
+}
+
 % Varianta bez autora
 \newcommand{\hlavickaBezAutora}[1]{
     \section*{\raisebox{-2ex}{\emph{ \huge{#1}}}}
@@ -51,7 +62,7 @@
         \textbf{\Huge #1}
     \end{center}
 }
-   
+
 \makeatletter
 \renewcommand\tableofcontents{%
      \nadpisobsah{\contentsname}
