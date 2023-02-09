@@ -23,38 +23,52 @@
 
 % Definice,jak se má vysázet název písně a její autor
 \newcounter{cisloSloky}
-\newcommand{\hlavicka}[2]{
-    \section*{\raisebox{-2ex}{\emph{ \huge{#1}}}} \hfill #2\hspace{2px}
+\newcommand{\hlavicka}[2][]{
+    \def\sectionColor{}
+    \def\starSign{}
+    \def\taktPlaceholder{}
+
+    \ifx\zvyraznitDefined\undefined
+        \def\zvyraznitDefined{0}
+    \fi
+    \if\zvyraznitDefined1
+        \renewcommand{\sectionColor}{\color{ForestGreen}}
+        \renewcommand{\starSign}{$\filledstar$}
+        \def\zvyraznitDefined{} % undefine
+    \fi
+
+    \ifx\taktDefined\undefined
+        \def\taktDefined{0}
+    \fi
+    \if\taktDefined1
+        \renewcommand{\taktPlaceholder}{{ \quad\large\taktValue}}
+        \def\taktDefined{} % undefine
+    \fi
+
+
+    % #1 is empty
+    \ifx&#1&
+        \section*{{\raisebox{-2ex}{\sectionColor\emph{ \huge{#2}}} \taktPlaceholder}}
+        \addcontentsline{toc}{subsection}{\starSign#2}
+    % #1 is nonempty
+    \else
+        \section*{{\raisebox{-2ex}{\sectionColor\emph{ \huge{#2}}} \taktPlaceholder}} \hfill #1\hspace{2px}
+        \addcontentsline{toc}{subsection}{\starSign#2 \texttt{\small (#1)}}
+    \fi
+
     \normalsize
     \vskip 3pt
     \hrule height 3pt
     \vskip 10pt
     \setcounter{cisloSloky}{0}
-    \addcontentsline{toc}{subsection}{#1 \texttt{\small (#2)}}
+
 }
 
-% Varianta se zvýrazněním
-\newcommand{\hlavickaStar}[2]{
-    \section*{\color{ForestGreen}\raisebox{-2ex}{\emph{ \huge{#1}}}} \hfill #2\hspace{2px}
-    \normalsize
-    \vskip 3pt
-    \hrule height 3pt
-    \vskip 10pt
-    \setcounter{cisloSloky}{0}
-    \addcontentsline{toc}{subsection}{$\filledstar$#1 \texttt{\small (#2)}}
-}
+% Pridanim pred "hlavicka" zvýrazní danou skladbu
+\newcommand{\zvyraznit}{\def\zvyraznitDefined{1}}
 
-% Varianta bez autora
-\newcommand{\hlavickaBezAutora}[1]{
-    \section*{\raisebox{-2ex}{\emph{ \huge{#1}}}}
-    \normalsize
-    \vskip 3pt
-    \hrule height 3pt
-    \vskip 10pt
-    \setcounter{cisloSloky}{0}
-    \addcontentsline{toc}{subsection}{#1}
-}
-
+% Pridanim pred "hlavicka" zapíše takt do hlavičky
+\newcommand{\takt}[2]{\def\taktDefined{1}\def\taktValue{$\frac{#1}{#2}$}}
 
 % Zpusob zapisu nadpisu "Obsah" do seznamu vsech kapitol v obsahu
 \newcommand{\nadpisobsah}[1]{
@@ -96,7 +110,7 @@
         \item #1
     \end{list}
 }
-    
+
 % Opakování sloky (vlastní číslo)
 \newcommand{\slokaOpakovani}[2]{
     \begin{list}{\textbf{\emph{#1}}}{\setlength{\leftmargin}{10mm}}
