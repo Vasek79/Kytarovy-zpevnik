@@ -14,6 +14,7 @@
 \usepackage{MnSymbol}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{anyfontsize}
+\usepackage{qrcode}
 \usepackage[pdftex]{hyperref}
 \usepackage[bottom]{footmisc}
 \usepackage{hmaty}
@@ -56,10 +57,13 @@ Za podmínky uvedení jeho původu, tedy je Vaší povinností uvést autorství
 Zdrojové soubory k tomuto zpěvníku najdete na \url{https://github.com/VasaMM/zpevnik}. Vytvořené pdf tamtéž.\\
 \\
 \\
-Ke zpěvníku byl vytvořen playlist pro službu Spotify \url{https://open.spotify.com/playlist/2eriz9vxG9uJzPwseSasVu?si=fcc7d09377ba4879}.\\
-\\
-\\
-Tento soubor byl vytvořen \today.
+\def\spotifyUrl{https://open.spotify.com/playlist/2eriz9vxG9uJzPwseSasVu?si=fcc7d09377ba4879}%
+Ke zpěvníku byl vytvořen playlist pro službu Spotify \url{\spotifyUrl}.\\
+\begin{center}
+	\qrcode[nolink, height=3cm]{\spotifyUrl}
+\end{center}
+\vfill
+\hfill\emph{Tento soubor byl vytvořen \today}.
 
 
 % Obsah
