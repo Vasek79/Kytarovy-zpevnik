@@ -1,3 +1,12 @@
+\include{config}
+
+% Pokud je nastaven černobílý tisk, zapnu černé odkazy
+\ifx\cernobilyTextPovoleno\undefined
+\else
+	\def\cerneOdkazyPovoleno{}
+\fi
+
+
 \documentclass[a5paper, 10pt, onecolumn]{article}
 \usepackage[T1]{fontenc}
 % Instal arev package in MikTeX:
@@ -13,14 +22,20 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{anyfontsize}
 \usepackage{qrcode}
-\usepackage[pdftex]{hyperref}
+\usepackage[pdftex, hidelinks]{hyperref}
 \usepackage{hmaty}
-\usepackage[titles]{tocloft}
-\renewcommand{\cftdot}{}
+% Skryji tečky v obsahu, pokud je vypnuto čříslování stránek
+\ifx\cislovaniStranekPovoleno\undefined
+	\usepackage[titles]{tocloft}
+	\renewcommand{\cftdot}{}
+\fi
 
-\hypersetup{
-    colorlinks = true
-}
+% Povolim barevné odkazy pouze pokud je to požadováno
+\ifx\cerneOdkazyPovoleno\undefined
+	\hypersetup{
+	    colorlinks = true
+	}
+\fi
 
 
 \begin{document}
@@ -67,9 +82,14 @@ Ke zpěvníku byl vytvořen playlist pro službu Spotify \url{\spotifyUrl}.\\
 \newpage
 \tableofcontents
 \thispagestyle{empty}
-%\pagenumbering{arabic}
-%\setcounter{page}{0}
 
+% Zapnu číslování stránek (jeli povoleno v konfiguraci)
+\ifx\cislovaniStranekPovoleno\undefined
+	% Cislovani je vyonuto, není nutné nic definovat
+\else
+	\pagenumbering{arabic}
+	\setcounter{page}{0}
+\fi
 
 % Písničky
 \addContentSection{A}

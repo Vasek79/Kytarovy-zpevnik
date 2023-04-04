@@ -16,7 +16,7 @@ Zpěvník má pro mě několik důležitých vlastností:
  - Zpěvník je optimalizován pro tisk na papír velikosti A5. Časem plánuji i možnost generovat A4.
  - Automaticky generovaný klikatelný obsah, taktéž jako rejstřík v PDF.
  - Kromě akordů jsou zaznačeny a začátky jednotlivých taktů, popř. více akordů v jednom taktu.
- - Volitelně lze zapnout číslování, zvýrazňování skladeb (bude doděláno).
+ - Volitelně lze zapnout barevné odkazy, číslování nebo zvýrazňování skladeb.
 
 
 Licence
@@ -46,7 +46,8 @@ Není nic jednoduššího. Existuje skvělá služba [Overleaf](https://overleaf
 editaci LaTeXových dokumentů bez potřeby cokoli stahovat na svůj počítač. Základním souborem je
 *Zpěvník.tex*, který definuje titulní stránku a vkládá jednotlivé skladby. Kromě něj je dobré si
 prohlédnout i obsah souboru *akordy.tex* s definicí všech akordů a *definitions.tex* kde jsou
-implementovány příkazy této šablony.
+implementovány příkazy této šablony. Konfigurace šablony (zapnutí či vypnutí zvýraznění skladeb,
+číslování stránek a vypnutí barev) se provádí v souboru *config.tex*.
 
 Odebrání písničky provedete jednoduše smazáním příslušného řádku ve *Zpěvník.tex*. Přidání provedete
 tamtéž, spolu s vytvořením souboru ve složce *Písničky*. Pro začátek doporučuji využít nějakou

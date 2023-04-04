@@ -32,8 +32,16 @@
         \def\zvyraznitDefined{0}
     \fi
     \if\zvyraznitDefined1
-        \renewcommand{\sectionColor}{\color{ForestGreen}}
-        \renewcommand{\starSign}{*}
+  		% Zvyrazmnovani funguje pouze pokud je povoleno v konfiguraci a není vynucená černá barva textu
+		\ifx\zvyraznitPovoleno\undefined
+		\else
+			\ifx\cernobilyTextPovoleno\undefined
+				\renewcommand{\sectionColor}{\color{ForestGreen}}
+			\fi
+			
+		    \renewcommand{\starSign}{*}
+	    \fi
+    
         \def\zvyraznitDefined{} % undefine
     \fi
 
