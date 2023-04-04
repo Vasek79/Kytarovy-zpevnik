@@ -1,7 +1,7 @@
 Kytarový zpěvník v LaTeXu
 =========================
 
-[Poslední verze tohoto zpěvníku ve formátu PDF ke stažení zde](https://github.com/VasaMM/zpevnik/raw/master/Zp%C4%9Bvn%C3%ADk.pdf)
+[Poslední verze tohoto zpěvníku ve formátu PDF ke stažení zde](https://github.com/VasaMM/zpevnik/releases/latest/download/Zpevnik.pdf)
 
 V tomto repozitáři najdete LaTeXovou šablonu pro snadnou tvorbu kytarového zpěvníku včetně více jak
 stovky písní podle mého výběru. Jako základ šablony bylo použito dílo od je postavena na šabloně od
