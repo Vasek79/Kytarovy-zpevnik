@@ -21,7 +21,8 @@ Zpěvník má pro mě několik důležitých vlastností:
 
 Licence
 -------
-Tuto šablonu jsem vytvořil pod licencí Creative Commons (CC BY 4.0)\
+Tuto šablonu jsem vytvořil pod licencí Creative Commons (CC BY 4.0). Texty s akordy jednotlivých
+skladeb a případné přílohy NEJSOU součástí této šablony a tudíž se na ně tato licence nevztahuje.\
 Dílo smíte:
  - *sdílet* - rozmnožovat a distribuovat materiál prostřednictvím jakéhokoli média v jakémkoli formátu
  - *upravit* - remixovat, změnit a vyjít z původního díla pro jakýkoliv účel, a to i komerční.
