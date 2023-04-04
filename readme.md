@@ -47,7 +47,7 @@ editaci LaTeXových dokumentů bez potřeby cokoli stahovat na svůj počítač.
 *Zpěvník.tex*, který definuje titulní stránku a vkládá jednotlivé skladby. Kromě něj je dobré si
 prohlédnout i obsah souboru *akordy.tex* s definicí všech akordů a *definitions.tex* kde jsou
 implementovány příkazy této šablony. Konfigurace šablony (zapnutí či vypnutí zvýraznění skladeb,
-číslování stránek a vypnutí barev) se provádí v souboru *config.tex*.
+číslování stránek a vypnutí barev) se provádí na začátku souboru *Zpěvník.tex*.
 
 Odebrání písničky provedete jednoduše smazáním příslušného řádku ve *Zpěvník.tex*. Přidání provedete
 tamtéž, spolu s vytvořením souboru ve složce *Písničky*. Pro začátek doporučuji využít nějakou

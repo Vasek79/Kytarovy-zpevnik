@@ -1,4 +1,23 @@
-\include{config}
+% Pokud existuje soubor config, použiji konfiguraci z něj
+\IfFileExists{./config.tex}{\include{config}}
+{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KONFIGURACE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Odkomentováním se povolí zvýrazňování vybraných skladeb
+% \def\zvyraznitPovoleno{}
+
+% Odkomentováním se zapne číslování stránek
+\def\cislovaniStranekPovoleno{}
+
+% Odkomentováním se vypnutí černá barva pro odkazy (vhodné k tisku)
+% \def\cerneOdkazyPovoleno{}
+
+% Odkomentováním se vypnutí černá barva pro veškerý text (vhodné k tisku na černobílé tiskárně). Již není nutné definovat \cernobilyObsahPovoleno
+% \def\cernobilyTextPovoleno{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KONEC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}
 
 % Pokud je nastaven černobílý tisk, zapnu černé odkazy
 \ifx\cernobilyTextPovoleno\undefined
